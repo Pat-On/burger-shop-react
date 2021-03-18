@@ -3,7 +3,6 @@ import classes from "./BurgerIngredients.module.css";
 import PropTypes from "prop-types";
 
 const burgerIngredient = (props) => {
-  console.log(props.type);
   let ingredient = null; // is going to render nothing if there is no option or error
 
   switch (props.type) {
