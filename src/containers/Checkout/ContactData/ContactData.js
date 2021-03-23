@@ -96,6 +96,9 @@ class ContactData extends Component {
         // },
         //!IMPORTANT he added it here because he want to make working the validation
         valid: true,
+        //first way how to resolve the error related to drop menu
+        // he said that he like it because it is keeping our elements the same
+        validation: {},
       },
     },
     formIsValid: false,
@@ -142,6 +145,10 @@ class ContactData extends Component {
 
   checkValidity(value, rules) {
     let isValid = true;
+    //second level validation - if we want or optionally second way of doing it
+    if (!rules) {
+      return true;
+    }
 
     if (rules.required) {
       isValid = value.trim() !== "" && isValid;
