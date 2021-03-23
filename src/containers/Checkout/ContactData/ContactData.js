@@ -90,13 +90,15 @@ class ContactData extends Component {
             { value: "slowest", displayValue: "Slowest" },
           ],
         },
-        value: "",
+        value: "fastest",
         // validation: {
         //   required: true,
         // },
-        valid: false,
+        //!IMPORTANT he added it here because he want to make working the validation
+        valid: true,
       },
     },
+    formIsValid: false,
     loading: false,
   };
 
@@ -178,7 +180,15 @@ class ContactData extends Component {
 
     updatedOrderForm[inputIdentifier] = updatedFormElement;
     console.log(updatedFormElement);
-    this.setState({ orderForm: updatedOrderForm });
+
+    //updating the validation state for all elements
+    let formIsValid = true;
+    for (let inputIdentifier in updatedOrderForm) {
+      //f-t = f t - t = t f - f = fetc
+      formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+    }
+
+    this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
   };
 
   render() {
@@ -229,7 +239,9 @@ class ContactData extends Component {
           name="postal"
           placeholder="Postal Code"
         /> */}
-        <Button btnType="Success">ORDER</Button>
+        <Button disabled={!this.state.formIsValid} btnType="Success">
+          ORDER
+        </Button>
       </form>
     );
     if (this.state.loading) {
