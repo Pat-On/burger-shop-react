@@ -73,10 +73,22 @@ class ContactData extends Component {
     e.preventDefault();
     this.setState({ loading: true });
     //alert("You continue!");
+    //we need only the key and value not a setting
+    const formData = {};
+    for (let formElementIdentifier in this.state.orderForm) {
+      //creating key value paris and setting it to the value
+
+      formData[formElementIdentifier] = this.state.orderForm[
+        formElementIdentifier
+      ].value;
+    }
+
+    console.log(formData);
     const order = {
       ingredients: this.props.ingredients,
       //recalculate prices on server because user my try to "play"
       price: this.props.price,
+      orderData: formData,
     };
     console.log(order);
     axios
@@ -126,7 +138,7 @@ class ContactData extends Component {
     }
 
     let form = (
-      <form>
+      <form onSubmit={this.orderHandler}>
         {/* <Input elementType="..." elementConfig="..." value="..." /> */}
         {formElementArray.map((formElement) => (
           <Input
@@ -161,9 +173,7 @@ class ContactData extends Component {
           name="postal"
           placeholder="Postal Code"
         /> */}
-        <Button btnType="Success" clicked={this.orderHandler}>
-          ORDER
-        </Button>
+        <Button btnType="Success">ORDER</Button>
       </form>
     );
     if (this.state.loading) {
