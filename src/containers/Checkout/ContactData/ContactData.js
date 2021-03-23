@@ -6,6 +6,8 @@ import Spinner from "../../../components/UI/Spinnner/Spinner";
 import Button from "../../../components/UI/Button/Button";
 import classes from "./ContactData.module.css";
 
+import Input from "../../../components/UI/Input/Input";
+
 class ContactData extends Component {
   state = {
     name: "",
@@ -56,26 +58,26 @@ class ContactData extends Component {
   render() {
     let form = (
       <form>
-        <input
-          className={classes.Input}
+        <Input
+          elementtype="input"
           type="text"
           name="name"
           placeholder="Your Name"
         />
-        <input
-          className={classes.Input}
+        <Input
+          elementtype="input"
           type="text"
           name="email"
           placeholder="Your email"
         />
-        <input
-          className={classes.Input}
+        <Input
+          elementtype="input"
           type="text"
           name="street"
           placeholder="Street"
         />
-        <input
-          className={classes.Input}
+        <Input
+          elementtype="input"
           type="text"
           name="postal"
           placeholder="Postal Code"
