@@ -95,6 +95,27 @@ class ContactData extends Component {
     console.log(this.props.ingredients);
   };
 
+  inputChangedHandler = (event, inputIdentifier) => {
+    console.log(inputIdentifier);
+    console.log(event.target.value);
+
+    const updatedOrderForm = {
+      //shallow copy
+      ...this.state.orderForm,
+    };
+    console.log(updatedOrderForm);
+    //we are going deeper with cloning
+    const updatedFormElement = {
+      ...updatedOrderForm[inputIdentifier],
+    };
+    console.log(updatedFormElement);
+    updatedFormElement.value = event.target.value;
+    console.log(updatedFormElement.value);
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
+    console.log(updatedFormElement);
+    this.setState({ orderForm: updatedOrderForm });
+  };
+
   render() {
     const formElementArray = [];
     for (let key in this.state.orderForm) {
@@ -113,6 +134,7 @@ class ContactData extends Component {
             elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
+            changed={(event) => this.inputChangedHandler(event, formElement.id)}
           />
         ))}
         {/* <Input
