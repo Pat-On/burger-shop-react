@@ -1,19 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
+//routing
 import { BrowserRouter } from "react-router-dom";
 
 //redux
-import { Provider } from "react-redux";
 import { createStore } from "redux";
+import { Provider } from "react-redux";
 
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+
+//part of the redux initial state (later from online)
 import reducer from "./store/reducer";
 
-const store = createStore(reducer);
+//REDUX
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
-//connecting store to our react application
+//connecting store to our react application + browser router
 const app = (
   <Provider store={store}>
     <BrowserRouter>

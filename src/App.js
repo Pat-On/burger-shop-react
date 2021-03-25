@@ -1,4 +1,7 @@
+//routing
 import React from "react";
+
+//routing
 import { Route } from "react-router-dom";
 
 import Layout from "./hoc/Layout/Layout";
@@ -6,6 +9,7 @@ import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
 import Checkout from "./containers/Checkout/Checkout";
 import Orders from "./containers/Orders/Orders";
 
+//routing
 function App() {
   return (
     <div>
