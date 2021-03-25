@@ -120,28 +120,28 @@ class ContactData extends Component {
       ].value;
     }
 
-    console.log(formData);
+    // console.log(formData);
     const order = {
       ingredients: this.props.ings,
       //recalculate prices on server because user my try to "play"
       price: this.props.price,
       orderData: formData,
     };
-    console.log(order);
+    // console.log(order);
     axios
       .post("orders.json", order)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         this.setState({ loading: false });
         this.props.history.push("/");
         return response;
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         this.setState({ loading: false });
       });
 
-    console.log(this.props.ingredients);
+    // console.log(this.props.ingredients);
   };
 
   checkValidity(value, rules) {
@@ -164,30 +164,30 @@ class ContactData extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-    console.log(inputIdentifier);
-    console.log(event.target.value);
+    // console.log(inputIdentifier);
+    // console.log(event.target.value);
 
     const updatedOrderForm = {
       //shallow copy
       ...this.state.orderForm,
     };
-    console.log(updatedOrderForm);
+    // console.log(updatedOrderForm);
     //we are going deeper with cloning
     const updatedFormElement = {
       ...updatedOrderForm[inputIdentifier],
     };
-    console.log(updatedFormElement);
+    // console.log(updatedFormElement);
     updatedFormElement.value = event.target.value;
     updatedFormElement.valid = this.checkValidity(
       updatedFormElement.value,
       updatedFormElement.validation
     );
-    console.log(updatedFormElement.value);
+    // console.log(updatedFormElement.value);
     //changing the value of the state touched
     updatedFormElement.touched = true;
 
     updatedOrderForm[inputIdentifier] = updatedFormElement;
-    console.log(updatedFormElement);
+    // console.log(updatedFormElement);
 
     //updating the validation state for all elements
     let formIsValid = true;

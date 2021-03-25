@@ -20,7 +20,7 @@ const INGREDIENTS_PRICES = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_INGREDIENT:
-      console.log("[reducer Line 15]");
+      // console.log("[reducer Line 15]");
       return {
         ...state, // first level copy
         ingredients: {

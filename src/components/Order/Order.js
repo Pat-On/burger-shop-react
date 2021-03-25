@@ -3,19 +3,19 @@ import React from "react";
 import classes from "./Order.module.css";
 
 const order = (props) => {
-  console.log(props);
+  // console.log(props);
   const ingredients = [];
-  console.log(props.ingredients);
+  // console.log(props.ingredients);
   for (let ingredientName in props.ingredients) {
-    console.log(ingredientName);
+    // console.log(ingredientName);
     ingredients.push({
       name: ingredientName,
       amount: props.ingredients[ingredientName],
     });
   }
-  console.log(ingredients);
+  // console.log(ingredients);
   const ingredientOutput = ingredients.map((ig) => {
-    console.log(ig);
+    // console.log(ig);
     return (
       <span
         style={{

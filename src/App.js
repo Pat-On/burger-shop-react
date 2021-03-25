@@ -12,6 +12,7 @@ import Orders from "./containers/Orders/Orders";
 //routing
 function App() {
   return (
+    // Layout provide the menu to the phone version
     <div>
       <Layout>
         <Route path="/checkout" component={Checkout} />
