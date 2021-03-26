@@ -36,7 +36,9 @@ class BurgerBuilder extends Component {
     // loading: false, //moved to the redux/funk
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.onInitIngredients();
+  }
 
   updatePurchase(ingredients) {
     // const ingredients = { ...this.state.ingredients };
@@ -136,6 +138,7 @@ const mapStateToProps = (state) => {
     // we have access to it via props
     ings: state.ingredients,
     price: state.totalPrice,
+    error: state.error,
   };
 };
 
@@ -145,6 +148,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(burgerBuilderActions.addIngredient(ingName)),
     onIngredientRemove: (ingName) =>
       dispatch(burgerBuilderActions.removeIngredient(ingName)),
+    onInitIngredients: () => dispatch(burgerBuilderActions.initIngredients()),
   };
 };
 

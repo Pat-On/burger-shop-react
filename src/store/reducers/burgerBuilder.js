@@ -45,6 +45,25 @@ const reducer = (state = initialState, action) => {
         totalPrice:
           state.totalPrice - INGREDIENTS_PRICES[action.ingredientName],
       };
+    case actionTypes.SET_INGREDIENTS:
+      return {
+        ...state,
+        // ingredients: action.ingredients,
+        // setting the ingredients in order
+        //we are loosing dynamic
+        ingredients: {
+          salad: action.ingredients.salad,
+          bacon: action.ingredients.bacon,
+          cheese: action.ingredients.cheese,
+          meat: action.ingredients.meat,
+        },
+        error: false,
+      };
+    case actionTypes.FETCH_INGREDIENTS_FAILED:
+      return {
+        ...state,
+        error: true,
+      };
     default:
       return state;
   }
