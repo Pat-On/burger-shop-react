@@ -22,7 +22,7 @@ export const purchaseBurgerFail = (error) => {
 
 // async action creator action dispatched after we click the button on gui
 export const purchaseBurgerStart = (orderData) => {
-  //middleware again - funk -
+  //middleware again - funk - why git is not counting it?
   return (dispatch) => {
     axios
       .post("orders.json", orderData)
