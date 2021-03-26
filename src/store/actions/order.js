@@ -20,10 +20,17 @@ export const purchaseBurgerFail = (error) => {
   };
 };
 
+export const purchaseBurgerStart = () => {
+  return {
+    type: actionTypes.PURCHASE_BURGER_START,
+  };
+};
+
 // async action creator action dispatched after we click the button on gui
-export const purchaseBurgerStart = (orderData) => {
+export const purchaseBurger = (orderData) => {
   //middleware again - funk - why git is not counting it?
   return (dispatch) => {
+    dispatch(purchaseBurgerStart());
     //he mentioned that it is normal pattern
     axios
       .post("orders.json", orderData)
