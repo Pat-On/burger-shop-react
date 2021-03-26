@@ -17,7 +17,7 @@ const INGREDIENTS_PRICES = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_INGREDIENT:
-      // different way of restructuing and updating the object - deep copy. is it worth?
+      // different way of restructuring and updating the object - deep copy. is it worth?
       const updatedIngredient = {
         [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
       };

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "../../../axios-order";
-// import axios from "axios";
 import { connect } from "react-redux";
 
 import Spinner from "../../../components/UI/Spinnner/Spinner";
@@ -111,7 +110,6 @@ class ContactData extends Component {
   orderHandler = (e) => {
     e.preventDefault();
 
-    //alert("You continue!");
     //we need only the key and value not a setting
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
@@ -162,7 +160,6 @@ class ContactData extends Component {
     const updatedFormElement = {
       ...updatedOrderForm[inputIdentifier],
     };
-    // console.log(updatedFormElement);
     updatedFormElement.value = event.target.value;
     updatedFormElement.valid = this.checkValidity(
       updatedFormElement.value,
@@ -170,8 +167,6 @@ class ContactData extends Component {
     );
     updatedOrderForm[inputIdentifier] = updatedFormElement;
 
-    // console.log(updatedFormElement.value);
-    // console.log(inputIdentifier);
     //changing the value of the state touched
     updatedFormElement.touched = true;
 
@@ -216,7 +211,6 @@ class ContactData extends Component {
         config: this.state.orderForm[key],
       });
     }
-    console.log(formElementArray);
 
     let form = (
       <form onSubmit={this.orderHandler}>
