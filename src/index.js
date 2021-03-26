@@ -1,19 +1,33 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
+//importing the middleware redux-thunk
+import thunk from "redux-thunk";
+
+//routing
 import { BrowserRouter } from "react-router-dom";
 
 //redux
+import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
 
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import reducer from "./store/reducer";
 
-const store = createStore(reducer);
+//part of the redux initial state (later from online)
+import burgerBuilderReducer from "./store/reducers/burgerBuilder";
 
-//connecting store to our react application
+//setting up middleware
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+//REDUX
+const store = createStore(
+  burgerBuilderReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
+
+//connecting store to our react application + browser router
 const app = (
   <Provider store={store}>
     <BrowserRouter>
