@@ -12,7 +12,7 @@ import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 import axios from "../../axios-order";
 //WOW he mentioned that it is going to automatically grab the index.js without pointing to it <LOL>
-import * as burgerBuilderActions from "../../store/actions/index";
+import * as actions from "../../store/actions/index";
 
 // const INGREDIENTS_PRICES = {
 //   salad: 0.5,
@@ -71,6 +71,7 @@ class BurgerBuilder extends Component {
     // }
     // queryParams.push("price=" + this.props.price);
     // const queryString = queryParams.join("&");
+    this.props.onInitPurchase();
     this.props.history.push("/checkout");
   };
 
@@ -144,11 +145,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onIngredientAdded: (ingName) =>
-      dispatch(burgerBuilderActions.addIngredient(ingName)),
+    onIngredientAdded: (ingName) => dispatch(actions.addIngredient(ingName)),
     onIngredientRemove: (ingName) =>
-      dispatch(burgerBuilderActions.removeIngredient(ingName)),
-    onInitIngredients: () => dispatch(burgerBuilderActions.initIngredients()),
+      dispatch(actions.removeIngredient(ingName)),
+    onInitIngredients: () => dispatch(actions.initIngredients()),
+    onInitPurchase: () => dispatch(actions.purchaseInit()),
   };
 };
 
