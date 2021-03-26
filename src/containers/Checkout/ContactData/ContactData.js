@@ -8,6 +8,8 @@ import Button from "../../../components/UI/Button/Button";
 import classes from "./ContactData.module.css";
 
 import Input from "../../../components/UI/Input/Input";
+import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
+import * as actions from "../../../store/actions/index";
 
 class ContactData extends Component {
   state = {
@@ -108,7 +110,7 @@ class ContactData extends Component {
 
   orderHandler = (e) => {
     e.preventDefault();
-    this.setState({ loading: true });
+
     //alert("You continue!");
     //we need only the key and value not a setting
     const formData = {};
@@ -120,28 +122,14 @@ class ContactData extends Component {
       ].value;
     }
 
-    // console.log(formData);
     const order = {
       ingredients: this.props.ings,
       //recalculate prices on server because user my try to "play"
       price: this.props.price,
       orderData: formData,
     };
-    // console.log(order);
-    axios
-      .post("orders.json", order)
-      .then((response) => {
-        // console.log(response);
-        this.setState({ loading: false });
-        this.props.history.push("/");
-        return response;
-      })
-      .catch((error) => {
-        // console.log(error);
-        this.setState({ loading: false });
-      });
 
-    // console.log(this.props.ingredients);
+    this.props.onOrderBurger(order);
   };
 
   checkValidity(value, rules) {
@@ -164,14 +152,11 @@ class ContactData extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-    // console.log(inputIdentifier);
-    // console.log(event.target.value);
-
     const updatedOrderForm = {
       //shallow copy
       ...this.state.orderForm,
     };
-    // console.log(updatedOrderForm);
+
     //we are going deeper with cloning
     const updatedFormElement = {
       ...updatedOrderForm[inputIdentifier],
@@ -182,17 +167,14 @@ class ContactData extends Component {
       updatedFormElement.value,
       updatedFormElement.validation
     );
-    // console.log(updatedFormElement.value);
+
     //changing the value of the state touched
     updatedFormElement.touched = true;
-
-    updatedOrderForm[inputIdentifier] = updatedFormElement;
-    // console.log(updatedFormElement);
 
     //updating the validation state for all elements
     let formIsValid = true;
     for (let inputIdentifier in updatedOrderForm) {
-      //f-t = f t - t = t f - f = fetc
+      //f-t = f t - t = t f - f = fetch
       formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
     }
 
@@ -223,30 +205,7 @@ class ContactData extends Component {
             changed={(event) => this.inputChangedHandler(event, formElement.id)}
           />
         ))}
-        {/* <Input
-          elementtype="input"
-          type="text"
-          name="name"
-          placeholder="Your Name"
-        />
-        <Input
-          elementtype="input"
-          type="text"
-          name="email"
-          placeholder="Your email"
-        />
-        <Input
-          elementtype="input"
-          type="text"
-          name="street"
-          placeholder="Street"
-        />
-        <Input
-          elementtype="input"
-          type="text"
-          name="postal"
-          placeholder="Postal Code"
-        /> */}
+
         <Button disabled={!this.state.formIsValid} btnType="Success">
           ORDER
         </Button>
@@ -272,4 +231,14 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onOrderBurger: (orderData) =>
+      dispatch(actions.purchaseBurgerStart(orderData)),
+  };
+};
+
+export default connect(
+  mapStateToProps
+  // mapDispatchToProps
+)(withErrorHandler(ContactData, axios));

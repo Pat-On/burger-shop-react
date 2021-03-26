@@ -15,7 +15,7 @@ export const purchaseBurgerSuccess = (id, orderData) => {
 // sync action creator - ???
 export const purchaseBurgerFail = (error) => {
   return {
-    type: actionTypes.purchaseBurgerFail,
+    type: actionTypes.PURCHASE_BURGER_FAIL,
     error: error,
   };
 };
