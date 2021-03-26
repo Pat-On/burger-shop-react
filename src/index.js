@@ -13,11 +13,11 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 //part of the redux initial state (later from online)
-import reducer from "./store/reducer";
+import burgerBuilderReducer from "./store/reducers/burgerBuilder";
 
 //REDUX
 const store = createStore(
-  reducer,
+  burgerBuilderReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

@@ -11,7 +11,8 @@ import Spinner from "../../components/UI/Spinnner/Spinner";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 import axios from "../../axios-order";
-import * as actionTypes from "../../store/actions";
+//WOW he mentioned that it is going to automatically grab the index.js without pointing to it <LOL>
+import * as burgerBuilderActions from "../../store/actions/index";
 
 // const INGREDIENTS_PRICES = {
 //   salad: 0.5,
@@ -140,15 +141,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onIngredientAdded: (ingName) =>
-      dispatch({
-        type: actionTypes.ADD_INGREDIENT,
-        ingredientName: ingName,
-      }),
+      dispatch(burgerBuilderActions.addIngredient(ingName)),
     onIngredientRemove: (ingName) =>
-      dispatch({
-        type: actionTypes.REMOVE_INGREDIENT,
-        ingredientName: ingName,
-      }),
+      dispatch(burgerBuilderActions.removeIngredient(ingName)),
   };
 };
 
