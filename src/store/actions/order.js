@@ -24,6 +24,7 @@ export const purchaseBurgerFail = (error) => {
 export const purchaseBurgerStart = (orderData) => {
   //middleware again - funk - why git is not counting it?
   return (dispatch) => {
+    //he mentioned that it is normal pattern
     axios
       .post("orders.json", orderData)
       .then((response) => {
