@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import ContactData from "../../containers/Checkout/ContactData/ContactData";
 
 class Checkout extends Component {
@@ -41,31 +41,35 @@ class Checkout extends Component {
   };
 
   render() {
-    return (
-      <div>
-        {/* temporary dummy data */}
-        <CheckoutSummary
-          ingredients={this.props.ings}
-          checkoutCancelled={this.checkoutCancelledHandler}
-          checkoutContinued={this.checkoutContinueHandler}
-        />
-        <Route
-          path={this.props.match.path + "/contact-data"}
-          component={ContactData}
-          // component={ContactData}
-          //manual rendering the <ContactData /> so basically
-          // we can just pass something to it
-          // render={(props) => (
-          // <ContactData
-          //   price={this.props.price}
-          //   ingredients={this.props.ingredients}
-          //   {...props} //it will include the history object so the push inside th
-          //   //contact data should work as well
-          // />
-          // )}
-        />
-      </div>
-    );
+    //redirecting when there is no ingredients - against the error :>
+    let summary = <Redirect to="/" />;
+    if (this.props.ing) {
+      summary = (
+        <div>
+          <CheckoutSummary
+            ingredients={this.props.ings}
+            checkoutCancelled={this.checkoutCancelledHandler}
+            checkoutContinued={this.checkoutContinueHandler}
+          />
+          <Route
+            path={this.props.match.path + "/contact-data"}
+            component={ContactData}
+            // component={ContactData}
+            //manual rendering the <ContactData /> so basically
+            // we can just pass something to it
+            // render={(props) => (
+            // <ContactData
+            //   price={this.props.price}
+            //   ingredients={this.props.ingredients}
+            //   {...props} //it will include the history object so the push inside th
+            //   //contact data should work as well
+            // />
+            // )}
+          />
+        </div>
+      );
+    }
+    return { summary };
   }
 }
 
