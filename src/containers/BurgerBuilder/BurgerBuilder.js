@@ -33,16 +33,10 @@ class BurgerBuilder extends Component {
     // totalPrice: 4,
     // purchasable: false,
     purchasing: false,
-    loading: false,
+    // loading: false, //moved to the redux/funk
   };
 
-  componentDidMount() {
-    // axios
-    //   .get(
-    //     "https://react-my-burger-6df65-default-rtdb.europe-west1.firebasedatabase.app/ingredients.json"
-    //   )
-    //   .then((response) => this.setState({ ingredients: response.data }));
-  }
+  componentDidMount() {}
 
   updatePurchase(ingredients) {
     // const ingredients = { ...this.state.ingredients };
@@ -90,7 +84,12 @@ class BurgerBuilder extends Component {
 
     let orderSummary = null;
 
-    let burger = <Spinner />;
+    let burger = this.props.error ? (
+      <p>Ingredients can't be loaded!</p>
+    ) : (
+      <Spinner />
+    );
+
     if (this.props.ings) {
       burger = (
         <Aux>
@@ -114,9 +113,11 @@ class BurgerBuilder extends Component {
         />
       );
     }
-    if (this.state.loading) {
-      orderSummary = <Spinner />;
-    }
+    // NOT REQUIRED HERE ANYMORE
+
+    // if (this.state.loading) {
+    //   orderSummary = <Spinner />;
+    // }
     return (
       <Aux>
         <Modal

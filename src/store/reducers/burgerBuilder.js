@@ -1,13 +1,9 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  ingredients: {
-    salad: 0,
-    bacon: 0,
-    cheese: 0,
-    meat: 0,
-  },
+  ingredients: null, //coming from fetch
   totalPrice: 4,
+  error: false,
 };
 // we can get it from anywhere DB or hard code
 const INGREDIENTS_PRICES = {
