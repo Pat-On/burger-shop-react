@@ -12,7 +12,7 @@ export const purchaseBurgerSuccess = (id, orderData) => {
   };
 };
 
-// sync action creator -
+// sync action creator - ???
 export const purchaseBurgerFail = (error) => {
   return {
     type: actionTypes.purchaseBurgerFail,
