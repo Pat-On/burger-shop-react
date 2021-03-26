@@ -104,7 +104,7 @@ class ContactData extends Component {
         validation: {},
       },
     },
-    formIsValid: false,
+    formIsValid: true,
     // loading: false,
   };
 
@@ -152,6 +152,7 @@ class ContactData extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
+    console.log(event.target.value);
     const updatedOrderForm = {
       //shallow copy
       ...this.state.orderForm,
@@ -167,7 +168,10 @@ class ContactData extends Component {
       updatedFormElement.value,
       updatedFormElement.validation
     );
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
 
+    // console.log(updatedFormElement.value);
+    // console.log(inputIdentifier);
     //changing the value of the state touched
     updatedFormElement.touched = true;
 
@@ -177,9 +181,32 @@ class ContactData extends Component {
       //f-t = f t - t = t f - f = fetch
       formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
     }
+    console.log(updatedFormElement);
 
     this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
   };
+
+  // inputChangedHandler = (event, inputIdentifier) => {
+  //   const updatedOrderForm = {
+  //     ...this.state.orderForm,
+  //   };
+  //   const updatedFormElement = {
+  //     ...updatedOrderForm[inputIdentifier],
+  //   };
+  //   updatedFormElement.value = event.target.value;
+  //   updatedFormElement.valid = this.checkValidity(
+  //     updatedFormElement.value,
+  //     updatedFormElement.validation
+  //   );
+  //   updatedFormElement.touched = true;
+  //   updatedOrderForm[inputIdentifier] = updatedFormElement;
+
+  //   let formIsValid = true;
+  //   for (let inputIdentifier in updatedOrderForm) {
+  //     formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+  //   }
+  //   this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
+  // };
 
   render() {
     const formElementArray = [];
@@ -189,6 +216,7 @@ class ContactData extends Component {
         config: this.state.orderForm[key],
       });
     }
+    console.log(formElementArray);
 
     let form = (
       <form onSubmit={this.orderHandler}>
@@ -226,9 +254,9 @@ class ContactData extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ings: state.ingredients,
-    price: state.totalPrice,
-    loading: state.loading,
+    ings: state.burgerBuilder.ingredients,
+    price: state.burgerBuilder.totalPrice,
+    loading: state.order.loading,
   };
 };
 

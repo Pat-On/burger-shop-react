@@ -8,7 +8,7 @@ import thunk from "redux-thunk";
 import { BrowserRouter } from "react-router-dom";
 
 //redux
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import { Provider } from "react-redux";
 
 import "./index.css";
@@ -17,13 +17,19 @@ import reportWebVitals from "./reportWebVitals";
 
 //part of the redux initial state (later from online)
 import burgerBuilderReducer from "./store/reducers/burgerBuilder";
+import orderReducer from "./store/reducers/order";
 
 //setting up middleware
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//combining the reducers
+const rootReducer = combineReducers({
+  burgerBuilder: burgerBuilderReducer,
+  order: orderReducer,
+});
 
 //REDUX
 const store = createStore(
-  burgerBuilderReducer,
+  rootReducer,
   composeEnhancers(applyMiddleware(thunk))
 );
 

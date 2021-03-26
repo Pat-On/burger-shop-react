@@ -41,9 +41,10 @@ class Checkout extends Component {
   };
 
   render() {
+    console.log(this.props.ings);
     //redirecting when there is no ingredients - against the error :>
     let summary = <Redirect to="/" />;
-    if (this.props.ing) {
+    if (this.props.ings) {
       summary = (
         <div>
           <CheckoutSummary
@@ -69,14 +70,14 @@ class Checkout extends Component {
         </div>
       );
     }
-    return { summary };
+    return summary;
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    ings: state.ingredients,
-    price: state.totalPrice,
+    ings: state.burgerBuilder.ingredients,
+    price: state.burgerBuilder.totalPrice,
   };
 };
 
