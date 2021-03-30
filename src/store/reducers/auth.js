@@ -29,6 +29,10 @@ const authFail = (state, action) => {
   });
 };
 
+const authLogout = (state, action) => {
+  return updateObject(state, { token: null, userId: null });
+};
+
 const reducer = (state = initialState, action) => {
   console.log(action);
   switch (action.type) {
@@ -40,6 +44,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.AUTH_FAIL:
       console.log("im in line 38 of reducer");
       return authFail(state, action);
+    case actionTypes.AUTH_LOGOUT:
+      return authLogout(state, action);
     default:
       return state;
   }
