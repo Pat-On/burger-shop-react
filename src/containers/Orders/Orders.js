@@ -16,7 +16,7 @@ class Orders extends Component {
   //   loading: true,
   // };
   componentDidMount() {
-    this.props.onFetchOrders();
+    this.props.onFetchOrders(this.props.token);
     // axios
     //   .get("/orders.json")
     //   .then((res) => {
@@ -33,8 +33,6 @@ class Orders extends Component {
     //   });
   }
   render() {
-    console.log(this.props.orders);
-    console.log(this.props.loading);
     let orders = <Spinner />;
     if (!this.props.loading) {
       orders = this.props.orders.map((order) => (
@@ -49,17 +47,20 @@ class Orders extends Component {
   }
 }
 
+//everything belong to the REDUX
+//we are getting it via the plug in from the main file? store correct: index.js <Provider store={store}>
 const mapStateToProps = (state) => {
   return {
     orders: state.order.orders,
     loading: state.order.loading,
+    token: state.auth.token, // getting from different reducer nice
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     ///action creators
-    onFetchOrders: () => dispatch(actions.fetchOrders()),
+    onFetchOrders: (token) => dispatch(actions.fetchOrders(token)),
   };
 };
 

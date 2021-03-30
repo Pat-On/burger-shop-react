@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "../../../axios-order";
-// import axios from "axios";
 import { connect } from "react-redux";
 
 import Spinner from "../../../components/UI/Spinnner/Spinner";
@@ -111,7 +110,6 @@ class ContactData extends Component {
   orderHandler = (e) => {
     e.preventDefault();
 
-    //alert("You continue!");
     //we need only the key and value not a setting
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
@@ -129,7 +127,7 @@ class ContactData extends Component {
       orderData: formData,
     };
 
-    this.props.onOrderBurger(order);
+    this.props.onOrderBurger(order, this.props.token);
   };
 
   checkValidity(value, rules) {
@@ -162,7 +160,6 @@ class ContactData extends Component {
     const updatedFormElement = {
       ...updatedOrderForm[inputIdentifier],
     };
-    // console.log(updatedFormElement);
     updatedFormElement.value = event.target.value;
     updatedFormElement.valid = this.checkValidity(
       updatedFormElement.value,
@@ -170,8 +167,6 @@ class ContactData extends Component {
     );
     updatedOrderForm[inputIdentifier] = updatedFormElement;
 
-    // console.log(updatedFormElement.value);
-    // console.log(inputIdentifier);
     //changing the value of the state touched
     updatedFormElement.touched = true;
 
@@ -216,7 +211,6 @@ class ContactData extends Component {
         config: this.state.orderForm[key],
       });
     }
-    console.log(formElementArray);
 
     let form = (
       <form onSubmit={this.orderHandler}>
@@ -257,12 +251,14 @@ const mapStateToProps = (state) => {
     ings: state.burgerBuilder.ingredients,
     price: state.burgerBuilder.totalPrice,
     loading: state.order.loading,
+    token: state.auth.token,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData)),
+    onOrderBurger: (orderData, token) =>
+      dispatch(actions.purchaseBurger(orderData, token)),
   };
 };
 

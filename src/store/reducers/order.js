@@ -50,7 +50,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
         //here we can store the error in the property in state if we want to han
-        //handle it somwewhere
+        //handle it somewhere
       };
     default:
       return state;

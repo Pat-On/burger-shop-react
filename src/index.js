@@ -16,18 +16,24 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 //part of the redux initial state (later from online)
+//so here we have our global state divided into two files plus reducers (functions) which are going to modify in
+//immutable way the state and trigger the subscriber pattern, and by this bringing the changes into the view port
 import burgerBuilderReducer from "./store/reducers/burgerBuilder";
 import orderReducer from "./store/reducers/order";
+import authReducer from "./store/reducers/auth";
 
-//setting up middleware
+//setting up middleware - "programs" which are working "in half step"
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-//combining the reducers
+
+//combining the reducers - and we become one!
 const rootReducer = combineReducers({
   burgerBuilder: burgerBuilderReducer,
   order: orderReducer,
+  auth: authReducer,
 });
 
-//REDUX
+//REDUX - rootReducer - contain the state + "reducers", so why exactly we are plugging the middleware?
+//middleware between action and reducers, so It may be only the implementation
 const store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(thunk))
@@ -46,6 +52,8 @@ ReactDOM.render(
   <React.StrictMode>{app}</React.StrictMode>,
   document.getElementById("root")
 );
+
+//DEFAULT - performance relayer
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -5,6 +5,7 @@ const initialState = {
   ingredients: null, //coming from fetch
   totalPrice: 4,
   error: false,
+  building: false,
 };
 // we can get it from anywhere DB or hard code
 const INGREDIENTS_PRICES = {
@@ -17,7 +18,7 @@ const INGREDIENTS_PRICES = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_INGREDIENT:
-      // different way of restructuing and updating the object - deep copy. is it worth?
+      // different way of restructuring and updating the object - deep copy. is it worth?
       const updatedIngredient = {
         [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
       };
@@ -29,6 +30,7 @@ const reducer = (state = initialState, action) => {
         ingredients: updatedIngredients,
         totalPrice:
           state.totalPrice + INGREDIENTS_PRICES[action.ingredientName],
+        building: true,
       };
       return updateObject(state, updatedState);
 
@@ -46,6 +48,7 @@ const reducer = (state = initialState, action) => {
         },
         totalPrice:
           state.totalPrice - INGREDIENTS_PRICES[action.ingredientName],
+        building: true,
       };
     case actionTypes.SET_INGREDIENTS:
       return {
@@ -61,6 +64,7 @@ const reducer = (state = initialState, action) => {
         },
         totalPrice: 4,
         error: false,
+        building: false,
       };
     case actionTypes.FETCH_INGREDIENTS_FAILED:
       return {

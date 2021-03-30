@@ -46,8 +46,6 @@ class Checkout extends Component {
   };
 
   render() {
-    console.log(this.props.ings);
-
     //redirecting when there is no ingredients - against the error :>
     let summary = <Redirect to="/" />;
     if (this.props.ings) {
