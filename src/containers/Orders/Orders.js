@@ -47,6 +47,8 @@ class Orders extends Component {
   }
 }
 
+//everything belong to the REDUX
+//we are getting it via the plug in from the main file? store correct: index.js <Provider store={store}>
 const mapStateToProps = (state) => {
   return {
     orders: state.order.orders,
