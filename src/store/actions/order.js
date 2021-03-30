@@ -27,13 +27,13 @@ export const purchaseBurgerStart = () => {
 };
 
 // async action creator action dispatched after we click the button on gui
-export const purchaseBurger = (orderData) => {
+export const purchaseBurger = (orderData, token) => {
   //middleware again - funk - why git is not counting it?
   return (dispatch) => {
     dispatch(purchaseBurgerStart());
     //he mentioned that it is normal pattern
     axios
-      .post("orders.json", orderData)
+      .post("orders.json?auth=" + token, orderData)
       .then((response) => {
         console.log(response.data);
         dispatch(purchaseBurgerSuccess(response.data.name, orderData));
@@ -71,11 +71,11 @@ export const fetchOrdersStart = () => {
   };
 };
 
-export const fetchOrders = () => {
+export const fetchOrders = (token) => {
   return (dispatch) => {
     dispatch(fetchOrdersStart());
     axios
-      .get("/orders.json")
+      .get("/orders.json?auth=" + token)
       .then((res) => {
         const fetchedOrders = [];
         for (let key in res.data) {

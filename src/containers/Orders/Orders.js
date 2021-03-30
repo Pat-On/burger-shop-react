@@ -16,7 +16,7 @@ class Orders extends Component {
   //   loading: true,
   // };
   componentDidMount() {
-    this.props.onFetchOrders();
+    this.props.onFetchOrders(this.props.token);
     // axios
     //   .get("/orders.json")
     //   .then((res) => {
@@ -53,13 +53,14 @@ const mapStateToProps = (state) => {
   return {
     orders: state.order.orders,
     loading: state.order.loading,
+    token: state.auth.token, // getting from different reducer nice
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     ///action creators
-    onFetchOrders: () => dispatch(actions.fetchOrders()),
+    onFetchOrders: (token) => dispatch(actions.fetchOrders(token)),
   };
 };
 
