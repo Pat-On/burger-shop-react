@@ -20,6 +20,7 @@ import reportWebVitals from "./reportWebVitals";
 //immutable way the state and trigger the subscriber pattern, and by this bringing the changes into the view port
 import burgerBuilderReducer from "./store/reducers/burgerBuilder";
 import orderReducer from "./store/reducers/order";
+import authReducer from "./store/reducers/auth";
 
 //setting up middleware - "programs" which are working "in half step"
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -28,6 +29,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
   burgerBuilder: burgerBuilderReducer,
   order: orderReducer,
+  auth: authReducer,
 });
 
 //REDUX - rootReducer - contain the state + "reducers", so why exactly we are plugging the middleware?
