@@ -6,7 +6,6 @@ import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSumm
 import { Route, Redirect } from "react-router-dom";
 import ContactData from "../../containers/Checkout/ContactData/ContactData";
 
-import * as actions from "../../store/actions/index";
 class Checkout extends Component {
   // state = {
   //   ingredients: null,

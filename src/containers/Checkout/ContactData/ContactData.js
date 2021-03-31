@@ -151,7 +151,6 @@ class ContactData extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-    console.log(event.target.value);
     const updatedOrderForm = {
       //shallow copy
       ...this.state.orderForm,
@@ -177,7 +176,6 @@ class ContactData extends Component {
       //f-t = f t - t = t f - f = fetch
       formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
     }
-    console.log(updatedFormElement);
 
     this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
   };
