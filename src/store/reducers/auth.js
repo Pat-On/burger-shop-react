@@ -14,7 +14,6 @@ const authStart = (state, action) => {
 };
 
 const authSuccess = (state, action) => {
-  console.log(action);
   return updateObject(state, {
     token: action.idToken,
     userId: action.userId,
@@ -39,15 +38,12 @@ const setAuthRedirectPath = (state, action) => {
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case actionTypes.AUTH_START:
       return authStart(state, action);
     case actionTypes.AUTH_SUCCESS:
-      console.log("im in line 38 of reducer");
       return authSuccess(state, action);
     case actionTypes.AUTH_FAIL:
-      console.log("im in line 38 of reducer");
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:
       return authLogout(state, action);
