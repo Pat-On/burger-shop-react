@@ -14,16 +14,27 @@ import NavigationItem from "./NavigationItem/NavigationItem";
 configure({ adapter: new Adapter() });
 
 describe("<NavigationItems />", () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<NavigationItem />);
+  });
+
   //actual test is going here
   //it allow to write one individual test
   it("should render two <NAvigationItems /> elements if not authenticated", () => {
     //we want to create here the instance of this component in a way like it would be rendered inside the browser
     //ENZYMe - allowing us to render the single component
 
-    const wrapper = shallow(<NavigationItems />);
-
     //expectation
 
     expect(wrapper.find(NavigationItem)).toHaveLength(2);
+  });
+
+  it("should render three <NAvigationItems /> elements if  authenticated", () => {
+    // wrapper = shallow(<NavigationItem isAuthenticated/>);
+    wrapper.setProps({ isAuthenticated: true });
+
+    expect(wrapper.find(NavigationItem)).toHaveLength(3);
   });
 });
