@@ -11,6 +11,9 @@ import { BrowserRouter } from "react-router-dom";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import { Provider } from "react-redux";
 
+//saga-redux
+import createSagaMiddleware from "redux-saga";
+
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -21,6 +24,8 @@ import reportWebVitals from "./reportWebVitals";
 import burgerBuilderReducer from "./store/reducers/burgerBuilder";
 import orderReducer from "./store/reducers/order";
 import authReducer from "./store/reducers/auth";
+
+import { logoutSaga } from "./store/sagas/auth";
 
 //setting up middleware - "programs" which are working "in half step"
 const composeEnhancers =
@@ -34,13 +39,17 @@ const rootReducer = combineReducers({
   order: orderReducer,
   auth: authReducer,
 });
+//creating sagaMiddleware like before in others
+const sagaMiddleware = createSagaMiddleware();
 
 //REDUX - rootReducer - contain the state + "reducers", so why exactly we are plugging the middleware?
 //middleware between action and reducers, so It may be only the implementation
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(thunk, sagaMiddleware))
 );
+
+sagaMiddleware.run(logoutSaga);
 
 //connecting store to our react application + browser router
 const app = (
