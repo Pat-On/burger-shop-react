@@ -49,7 +49,7 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk, sagaMiddleware))
 );
 
-// sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(watchAuth);
 
 //connecting store to our react application + browser router
 const app = (
