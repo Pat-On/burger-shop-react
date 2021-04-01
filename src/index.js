@@ -25,7 +25,7 @@ import burgerBuilderReducer from "./store/reducers/burgerBuilder";
 import orderReducer from "./store/reducers/order";
 import authReducer from "./store/reducers/auth";
 
-import { logoutSaga } from "./store/sagas/auth";
+import { watchAuth } from "./store/sagas/index";
 
 //setting up middleware - "programs" which are working "in half step"
 const composeEnhancers =
@@ -49,7 +49,7 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk, sagaMiddleware))
 );
 
-sagaMiddleware.run(logoutSaga);
+sagaMiddleware.run(watchAuth);
 
 //connecting store to our react application + browser router
 const app = (
