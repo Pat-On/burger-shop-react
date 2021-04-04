@@ -8,7 +8,7 @@ export default (httpClient) => {
       console.log("[withErrorHandler - unmounted]");
     };
   }, []);
-
+  //   const { request, response } = httpClient.interceptors;
   const reqInterceptor = httpClient.interceptors.request.use((req) => {
     console.log("[did you get here? reqInterceptor]");
     setError(null);

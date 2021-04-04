@@ -28,9 +28,13 @@ const Auth = React.lazy(() => {
 });
 
 const App = (props) => {
+  const { onTryAutoSignup } = props;
   useEffect(() => {
-    props.onTryAutoSignup();
-  }, []);
+    console.log("[App.js] - test of useEffect!");
+    // interesting concept, so this would run only when the function would change
+    //so when function change? nly when the component is re-rendered
+    onTryAutoSignup();
+  }, [onTryAutoSignup]);
 
   //guarding the  sections
 
