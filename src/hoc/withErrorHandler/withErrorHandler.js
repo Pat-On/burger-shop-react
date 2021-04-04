@@ -6,23 +6,32 @@ import Aux from "../Auxillary/Auxillary";
 const withErrorHandler = (WrappedComponent, axios) => {
   return (props) => {
     console.log(props);
+    console.log(axios);
     const [error, setError] = useState(null);
 
+    useEffect(() => {
+      return () => {
+        console.log("[withErrorHandler - unmounted]");
+      };
+    }, []);
     // state = {
     //   error: null,
     // };
 
     // we want to make it rn before component mount, so we want to leave it here
     const reqInterceptor = axios.interceptors.request.use((req) => {
+      console.log("[did you get here? reqInterceptor]");
       setError(null);
       return req;
     });
     const resInterceptor = axios.interceptors.response.use(
       (res) => res,
       (err) => {
+        console.log(err);
         setError(err);
       }
     );
+    console.log(error);
     // componentDidMount() {
     //   this.reqInterceptor = axios.interceptors.request.use((req) => {
     //     this.setState({ error: null });
@@ -39,6 +48,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
     useEffect(() => {
       return () => {
         // clean up function
+        // console.log(error);
         console.log("will unmount", reqInterceptor, resInterceptor);
         axios.interceptors.request.eject(reqInterceptor);
         axios.interceptors.request.eject(resInterceptor);
