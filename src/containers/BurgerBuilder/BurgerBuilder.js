@@ -1,5 +1,5 @@
-import React, { Component, useState, useEffect, useCallback } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Aux from "../../hoc/Auxillary/Auxillary";
 import Burger from "../../components/Burger/Burger";
@@ -49,6 +49,7 @@ const BurgerBuilder = (props) => {
     dispatch(actions.removeIngredient(ingName));
   const onInitIngredients = useCallback(
     () => dispatch(actions.initIngredients()),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
   const onInitPurchase = () => dispatch(actions.purchaseInit());

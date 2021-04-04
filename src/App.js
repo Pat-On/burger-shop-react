@@ -1,5 +1,5 @@
 //routing
-import React, { Component, useEffect, Suspense } from "react";
+import React, { useEffect, Suspense } from "react";
 import { connect } from "react-redux";
 
 //routing

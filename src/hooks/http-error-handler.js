@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (httpClient) => {
   const [error, setError] = useState(null);
 
@@ -25,7 +26,7 @@ export default (httpClient) => {
 
   useEffect(() => {
     return () => {
-      console.log("will unmount", reqInterceptor, resInterceptor);
+      //   console.log("will unmount", reqInterceptor, resInterceptor);
       httpClient.interceptors.request.eject(reqInterceptor);
       httpClient.interceptors.request.eject(resInterceptor);
     };
