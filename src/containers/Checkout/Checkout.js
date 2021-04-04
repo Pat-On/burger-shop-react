@@ -6,7 +6,7 @@ import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSumm
 import { Route, Redirect } from "react-router-dom";
 import ContactData from "../../containers/Checkout/ContactData/ContactData";
 
-class Checkout extends Component {
+const Checkout = (props) => {
   // state = {
   //   ingredients: null,
   //   price: 0,
@@ -36,50 +36,46 @@ class Checkout extends Component {
   //   this.setState({ ingredients: ingredients, totalPrice: price });
   // }
 
-  checkoutCancelledHandler = () => {
-    this.props.history.goBack();
+  const checkoutCancelledHandler = () => {
+    props.history.goBack();
   };
 
-  checkoutContinueHandler = () => {
-    this.props.history.replace("/checkout/contact-data");
+  const checkoutContinueHandler = () => {
+    props.history.replace("/checkout/contact-data");
   };
 
-  render() {
-    //redirecting when there is no ingredients - against the error :>
-    let summary = <Redirect to="/" />;
-    if (this.props.ings) {
-      const purchasedRedirect = this.props.purchased ? (
-        <Redirect to="/" />
-      ) : null;
-      summary = (
-        <div>
-          {purchasedRedirect}
-          <CheckoutSummary
-            ingredients={this.props.ings}
-            checkoutCancelled={this.checkoutCancelledHandler}
-            checkoutContinued={this.checkoutContinueHandler}
-          />
-          <Route
-            path={this.props.match.path + "/contact-data"}
-            component={ContactData}
-            // component={ContactData}
-            //manual rendering the <ContactData /> so basically
-            // we can just pass something to it
-            // render={(props) => (
-            // <ContactData
-            //   price={this.props.price}
-            //   ingredients={this.props.ingredients}
-            //   {...props} //it will include the history object so the push inside th
-            //   //contact data should work as well
-            // />
-            // )}
-          />
-        </div>
-      );
-    }
-    return summary;
+  //redirecting when there is no ingredients - against the error :>
+  let summary = <Redirect to="/" />;
+  if (props.ings) {
+    const purchasedRedirect = props.purchased ? <Redirect to="/" /> : null;
+    summary = (
+      <div>
+        {purchasedRedirect}
+        <CheckoutSummary
+          ingredients={props.ings}
+          checkoutCancelled={checkoutCancelledHandler}
+          checkoutContinued={checkoutContinueHandler}
+        />
+        <Route
+          path={props.match.path + "/contact-data"}
+          component={ContactData}
+          // component={ContactData}
+          //manual rendering the <ContactData /> so basically
+          // we can just pass something to it
+          // render={(props) => (
+          // <ContactData
+          //   price={this.props.price}
+          //   ingredients={this.props.ingredients}
+          //   {...props} //it will include the history object so the push inside th
+          //   //contact data should work as well
+          // />
+          // )}
+        />
+      </div>
+    );
   }
-}
+  return summary;
+};
 
 const mapStateToProps = (state) => {
   return {
