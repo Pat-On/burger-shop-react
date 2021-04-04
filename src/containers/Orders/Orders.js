@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 
 import { connect } from "react-redux";
 
@@ -10,42 +10,46 @@ import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import * as actions from "../../store/actions/index";
 import Spinner from "../../components/UI/Spinnner/Spinner";
 
-class Orders extends Component {
+const Orders = (props) => {
   // state = {
   //   orders: [],
   //   loading: true,
   // };
-  componentDidMount() {
-    this.props.onFetchOrders(this.props.token, this.props.userId);
-    // axios
-    //   .get("/orders.json")
-    //   .then((res) => {
-    //     // console.log(res);
-    //     const fetchedOrders = [];
-    //     for (let key in res.data) {
-    //       fetchedOrders.push({ ...res.data[key], id: key });
-    //     }
-    //     // console.log(fetchedOrders);
-    //     this.setState({ loading: false, orders: fetchedOrders });
-    //   })
-    //   .catch((err) => {
-    //     this.setState({ loading: false });
-    //   });
+
+  //in this scenario it is like componentDidMount
+  useEffect(() => {
+    props.onFetchOrders(props.token, props.userId);
+  }, []);
+  // componentDidMount() {
+  //   this.props.onFetchOrders(this.props.token, this.props.userId);
+  //   // axios
+  //   //   .get("/orders.json")
+  //   //   .then((res) => {
+  //   //     // console.log(res);
+  //   //     const fetchedOrders = [];
+  //   //     for (let key in res.data) {
+  //   //       fetchedOrders.push({ ...res.data[key], id: key });
+  //   //     }
+  //   //     // console.log(fetchedOrders);
+  //   //     this.setState({ loading: false, orders: fetchedOrders });
+  //   //   })
+  //   //   .catch((err) => {
+  //   //     this.setState({ loading: false });
+  //   //   });
+  // }
+
+  let orders = <Spinner />;
+  if (!props.loading) {
+    orders = props.orders.map((order) => (
+      <Order
+        key={order.id}
+        ingredients={order.ingredients}
+        price={order.price}
+      />
+    ));
   }
-  render() {
-    let orders = <Spinner />;
-    if (!this.props.loading) {
-      orders = this.props.orders.map((order) => (
-        <Order
-          key={order.id}
-          ingredients={order.ingredients}
-          price={order.price}
-        />
-      ));
-    }
-    return <div>{orders}</div>;
-  }
-}
+  return <div>{orders}</div>;
+};
 
 //everything belong to the REDUX
 //we are getting it via the plug in from the main file? store correct: index.js <Provider store={store}>
